@@ -1,0 +1,68 @@
+<%inherit file="../_base.html"/>
+
+
+<%block name="main">
+	<h1>
+		<div class="breadcrumbs"><a href=".">Ваши книги</a></div>
+		«${book.title}»
+		<a title="Свойства книги" class="tool" href="./book?book_id=${book.book_id}"><i class="fa fa-book" aria-hidden="true"></i></a>
+		<span title="Страницы книги" class="tool"><i class="fa fa-files-o" aria-hidden="true"></i></span>
+		<a title="Загрузка новых страниц" class="tool" href="./upload?book_id=${book.book_id}"><i class="fa fa-upload" aria-hidden="true"></i></a>
+	</h1>
+	<div id="_content" class="content-pages">
+		% if len(book.pages) > 0:
+			<ul id="pages">
+				% for page in book.pages:
+					<li class="ui-state-default ${'has-parts' if page.parts else ''} ${'enabled' if page.enabled else ''}" data-original="${page.original}" data-page_id="${page.page_id}" title="${page.title}">
+						<img src="${page.img_href()}">
+						<div class="controls">
+							<span>${loop.index+1}</span>
+							<i title="Редактировать свойста" class="btn-props fa fa-pencil" aria-hidden="true"></i>
+							<i title="Расшифровать" class="btn-parts fa fa-scissors" aria-hidden="true"></i>
+							<i title="Удалить" class="btn-delete fa fa-trash-o" aria-hidden="true"></i>
+						</div>
+					</li>
+				% endfor
+			</ul>
+			<div id="form-updatepage" class="dialog" title="Редактировать страницу">
+				<form>
+					<div class="control">
+						<label for="page-title">Заголовок</label>
+						<input type="text" name="page-title" id="page-title" value="" class="text ui-widget-content ui-corner-all">
+					</div>
+					<div class="control">
+						<label for="page-note">Заметки</label>
+						<textarea name="page-note" id="page-note" class="textarea ui-widget-content ui-corner-all"></textarea>
+					</div>
+					<div class="control">
+						<label>
+							<input type="checkbox" name="page-enabled" id="page-enabled" value="1">
+							страница опубликована на сайте
+						</label>
+					</div>
+					<!-- Allow form submission with keyboard without duplicating the dialog button -->
+					<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+					<input type="hidden" name="page-page_id" id="page-page_id" value="0">
+			  </form>
+			</div>
+		% else:
+			<p class="message-large">В этой книге пока нет ни одной страницы.<br>
+				<a href="./upload?book_id=${book.book_id}"><i class="fa fa-upload" aria-hidden="true"></i> Загрузить?</a></p>
+		% endif
+	</div>
+</%block>
+
+
+<%block name="scripts">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+	<script src="/i/admin-pages.js"></script>
+	<script>
+		var BOOK_ID = ${book.book_id}
+	</script>
+</%block>
+
+
+<%block name="styles">
+	<link href="https://code.jquery.com/ui/1.12.1/themes/blitzer/jquery-ui.css" rel="stylesheet">
+	<link href="/i/admin.css" rel="stylesheet">
+</%block>

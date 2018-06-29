@@ -1,0 +1,13 @@
+<%inherit file="../_base.html"/>
+
+
+<%block name="main">
+	<h1>${account.email}</h1>
+	<div id="_content" class="content-text">
+		<ul class="fa-icons">
+			<li><a href="/admin/" title=""><i class="fa fa-list-alt" aria-hidden="true"></i>Книги</a></li>
+			<li><a href="/account/update/" title=""><i class="fa fa-user" aria-hidden="true"></i>Профиль</a></li>
+			<li><a href="/account/logout/" title=""><i class="fa fa-sign-out" aria-hidden="true"></i>Выйти</a></li>
+		</ul>
+	</div>
+</%block>

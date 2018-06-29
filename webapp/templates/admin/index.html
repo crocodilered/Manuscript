@@ -1,0 +1,17 @@
+<%inherit file="../_base.html"/>
+
+<%block name="main">
+	<h1>Ваши книги</h1>
+	<div id="_content" class="content-list">
+		<ul class="fa-icons">
+			<li class="plus"><a href="./book"><i class="fa fa-plus-circle" aria-hidden="true"></i>Создать новую книгу</a></li>
+			% for book in books:
+				<li ${'class="disabled"' if not book.enabled else ''|n} ><a href="./pages?book_id=${book.book_id}"><i class="fa fa-book" aria-hidden="true"></i>${book.title}</a></li>
+			% endfor
+		</ul>
+	</div>
+</%block>
+
+<%block name="styles">
+	<link href="/i/admin.css" rel="stylesheet">
+</%block>

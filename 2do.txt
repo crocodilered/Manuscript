@@ -1,0 +1,6 @@
+0. About project text
+1. Групповое удаление страниц книги (вместе с книгой?)
+2. Send password with email
+3. Material design?
+4. Значение для self.sa_engine.echo брать из config
+5. Перестать генерить страницы при помощи javascript: плохо для поиска

@@ -1,0 +1,23 @@
+<%inherit file="../_base.html"/>
+
+
+<%block name="main">
+	<h1>Вход</h1>
+	<div id="_content" class="content-login">
+		<form method="post" class="form-wrapper">
+			%if error_code != 0:
+				<div class="error">
+					%if error_code == 2:
+						Активный пользователь с введенными вами логином и паролем не найден.
+					%elif error_code == 1:
+						Необходимо заполнить все поля.
+					%endif
+				</div>
+			%endif
+			<div class="input"><input placeholder="Электронная почта" type="email" name="email" required autofocus></div>
+			<div class="input"><input placeholder="Пароль" type="password" name="password" required></div>
+			<div class="input"><button>Войти</button></div>
+			<div class="appendix"><a href="/account/create/">Создать учетную запись</a></div>
+		<form>
+	</div>
+</%block>

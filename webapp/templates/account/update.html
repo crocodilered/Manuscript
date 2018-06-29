@@ -1,0 +1,49 @@
+<%inherit file="../_base.html"/>
+
+
+<%block name="main">
+	<h1>Профиль ${account.email}</h1>
+	<div id="_content" class="content-login">
+		<form method="post" class="form-wrapper">
+
+			%if error_code != 0:
+				<div class="error">
+					%if error_code == 2:
+						Вы неверно повторили новый пароль.
+					%elif error_code == 3:
+						Вы указали неверный текущий пароль.
+					%endif
+				</div>
+			%endif
+
+			<div class="input"><label for="input-title">Ваше имя:</label><input id="input-title" placeholder="" value="${account.title}" type="text" name="title" required autofocus></div>
+			<div class="input" id="wrapper-button-update-password"
+				style="${'display:none' if error_code == 2 or error_code == 3 else ''}"
+			><button class="like-href" id="button-update-password">Сменить пароль</button></div>
+			<div id="wrapper-panel-update-password"
+				style="${'' if error_code == 2 or error_code == 3 else 'display:none'}"
+			>
+				<hr>
+				<div class="input"><label for="input-password_1">Новый пароль:</label><input id="input-password_1" placeholder="" value="" type="password" name="password_1"></div>
+				<div class="input"><label for="input-password_2">Новый пароль еще раз:</label><input id="input-password_2" placeholder="" value="" type="password" name="password_2"></div>
+				<div class="input"><label for="input-password_curr">Также необходимо ввести текущий пароль:</label><input id="input-password_curr" placeholder="" value="" type="password" name="password_curr"></div>
+			</div>
+			<div class="input"><button>Сохранить</button></div>
+		</form>
+	</div>
+</%block>
+
+
+<%block name="scripts">
+	<script>
+		'use strict';
+		$('#button-update-password').click(function(e) {
+			event.preventDefault();
+			$('#wrapper-button-update-password').hide(300, function() {
+				$('#wrapper-panel-update-password').show(300, function() {
+					$('#input-password_1').focus();
+				});
+			});
+		});
+	</script>
+</%block>

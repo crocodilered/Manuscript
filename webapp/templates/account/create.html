@@ -1,0 +1,28 @@
+<%inherit file="../_base.html"/>
+
+
+<%block name="main">
+	<h1>Создание учетной записи</h1>
+	<div id="_content" class="content-login">
+		<form method="post" class="form-wrapper">
+			%if error_code != None and error_code != 0:
+				<div class="error">
+					%if error_code == 1:
+						Вы не указали пароль или адрес электронной почты.
+					%elif error_code == 2:
+						Пользователь с таким адресом уже зарегистрирован.
+					%endif
+				</div>
+			%endif
+			%if error_code == 0:
+				<div class="success">
+					Учетная запись создана. Далее можно покопаться в <a href="/account/">профиле</a>.
+				</div>
+			%else:
+				<div class="input"><input placeholder="Электронная почта" type="email" name="email" required autofocus></div>
+				<div class="input"><input placeholder="Пароль" type="password" name="password" required></div>
+				<div class="input"><button>Создать</button></div>
+			%endif
+		<form>
+	</div>
+</%block>

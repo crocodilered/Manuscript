@@ -1,0 +1,40 @@
+<%inherit file="../_base.html"/>
+
+<%block name="main">
+	<h1>
+		<div class="breadcrumbs"><a href=".">Ваши книги</a></div>
+		% if book.title:
+			«${book.title}»
+			<span title="Свойства книги" class="tool" href="./book?book_id=${book.book_id}"><i class="fa fa-book" aria-hidden="true"></i></span>
+			<a title="Страницы книги" class="tool" href="./pages?book_id=${book.book_id}"><i class="fa fa-files-o" aria-hidden="true"></i></a>
+			<a title="Загрузка новых страниц" class="tool" href="./upload?book_id=${book.book_id}"><i class="fa fa-upload" aria-hidden="true"></i></a>
+		% else:
+			Новая книга
+			<span title="Свойства книги" class="tool"><i class="fa fa-book" aria-hidden="true"></i></span>
+			<span title="Страницы книги" class="tool"><i class="fa fa-files-o" aria-hidden="true"></i></span>
+			<span title="Загрузка новых страниц" class="tool"><i class="fa fa-upload" aria-hidden="true"></i></span>
+		% endif
+	</h1>
+	<div id="_content" class="content-form">
+		<form method="post" class="form-wrapper">
+			<div class="input"><label for="input-title">Название:</label><input id="input-title" value="${book.title}" type="text" name="title" required autofocus></div>
+			<div class="input"><label for="input-author">Автор:</label><input id="input-author" value="${book.author}" type="text" name="author"></div>
+			<div class="input"><label for="input-description">Описание:</label><textarea id="input-description" type="text" name="description">${book.description}</textarea></div>
+			<div class="input checkbox">
+				<input id="input-enabled" type="checkbox" name="enabled" value="1" ${'checked' if book and book.enabled else ''} >
+				<label for="input-enabled">Опубликовано</label>
+			</div>
+			<div class="input buttons">
+				<button>Сохранить</button>
+				% if book.book_id:
+					<button class="delete" name="cmd_delete" onclick="return confirm('Удаление книги «${book.title}»! Вы уверены?')">Удалить</button>
+				% endif
+			</div>
+		</form>
+	</div>
+</%block>
+
+
+<%block name="styles">
+	<link href="/i/admin.css" rel="stylesheet">
+</%block>

@@ -1,0 +1,56 @@
+<%inherit file="../_base.html"/>
+
+
+<%block name="main">
+	<div id="page">
+		<div id="canvas-position">
+			<div id="canvas-wrapper">
+				<canvas id="canvas"></canvas>
+			</div>
+		</div>
+	</div>
+	<div id="parts">
+		<div id="toolbar">
+			<button class="ui-button ui-widget ui-corner-all" id="btn-add-block"><i class="fa fa-plus" aria-hidden="true"></i>  Добавить фрагмент</button>
+			<button class="ui-button ui-widget ui-corner-all" id="btn-zoom-page"><i class="fa fa-search-plus" aria-hidden="true"></i>  Увеличить страницу</button>
+			<button class="ui-button ui-widget ui-corner-all" id="btn-return"><i class="fa fa-arrow-left" aria-hidden="true"></i>  Вернуться</button>
+			<!--button class="ui-button ui-widget ui-corner-all" id="btn-help">Справка</button-->
+		</div>
+		<div id="text-wrapper">
+			<div id="text"></div>
+		</div>
+		<div id="help">
+			<p>Для начала работы нажмите кнопку «Добавить фрагмент».</p>
+		</div>
+		<div id="editor">
+			<div class="wrapper">
+				<div style="position:absolute; left:20px; right:20px; bottom:100px; top:20px;"><textarea id="editor-textarea" data-part_id=""></textarea></div>
+				<div style="position:absolute; bottom:20px">
+					<div class="ui-dialog-buttonset">
+						<button type="button" class="ui-button ui-corner-all ui-widget" id="save-button">Сохранить</button>
+						<button type="button" class="ui-button ui-corner-all ui-widget" id="cancel-button">Отменить</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</%block>
+
+
+<%block name="scripts">
+	<script src="https://cloud.tinymce.com/stable/tinymce.js"></script> <!-- версия minified глючит -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+	<script src="/i/admin-page.js"></script>
+	<script src="/i/draw-polygon.js"></script>
+	<script src="/i/utils.js"></script>
+	<script>
+		var BOOK_ID = ${book.book_id};
+		var PAGE_ID = ${page.page_id};
+	</script>
+</%block>
+
+
+<%block name="styles">
+	<link href="https://code.jquery.com/ui/1.12.1/themes/blitzer/jquery-ui.css" rel="stylesheet">
+	<link href="/i/admin.css" rel="stylesheet">
+</%block>

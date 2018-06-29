@@ -1,0 +1,61 @@
+<%inherit file="../_base.html"/>
+
+
+<%block name="main">
+	% if not page:
+		<h1>${book.title}</h1>
+	% endif
+	<div id="_content" class="${'page' if page else ''}">
+		% if page and page.enabled:
+			<div id="image">
+				<div id="canvas-position">
+					<div id="canvas-wrapper">
+						<canvas id="canvas"></canvas>
+					</div>
+				</div>
+			</div>
+			<div id="parts"></div>
+			<div style="display:none;">
+				<!-- For search engines. Have to do it less foolish. -->
+				% if page.parts:
+					% for p in page.parts:
+						${p.content|n}
+					% endfor
+				% endif
+			</div>
+		% else:
+			% if book.author:
+				<div class="book-author">${book.author}</div>
+			% endif
+			% if book.description:
+				<div class="book-description">${book.description.replace("\n", "<br>")|n}</div>
+			% endif
+			<ul id="pages">
+				<% page_num = 0 %>
+				% for p in book.pages:
+					% if p.enabled:
+						<% page_num += 1 %>
+						<li data-page_id="${p.page_id}" title="${p.title}">
+							<a href="${p.href()}"><img src="${p.img_href()}" alt=""></a>
+							<b>${page_num}</b>
+						</li>
+					% endif
+				% endfor
+			</ul>
+		% endif
+	</div>
+</%block>
+
+
+<%block name="scripts">
+	% if page:
+		<script src="/i/draw-polygon.js"></script>
+		<script src="/i/utils.js"></script>
+		<script src="/i/page.js"></script>
+		<script>
+			var BOOK_ID = ${book.book_id},
+				PAGE_ID = ${page.page_id},
+				DRAW_TOOL, CANVAS_HEIGHT, CANVAS_WIDTH;
+		</script>
+	% endif
+</%block>

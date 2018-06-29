@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="theme-color" content="#3e3e3e">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+		<link href="/i/common.css" rel="stylesheet">
+		<%block name="styles"/>
+		<title>Publicscript</title>
+	</head>
+	<body>
+		<div id="_header">
+			<table>
+				<tr>
+					<td>
+						<a href="/" class="logo" style="margin-right:0">PublicScript.org</a><span id="book-title"></span>
+					</td>
+					<td class="page-navigation">
+						<span><a 
+								href="#" title="Предыдущая страница" id="href-prev">&larr;</a><a 
+								href="#" title="Каталог страниц" id="href-toc">Оглавление</a><a 
+								href="#" title="Следующая страница" id="href-next">&rarr;</a>
+						</span><span class="s">•</span><span><b>Масштаб:</b><a 
+								href="#" id="href-zoomin" title="Увеличить масштаб изображения">Больше</a><a 
+								href="#" id="href-zoomout" title="Уменьшить масштаб изображения">Меньше</a><a 
+								href="#" id="href-zoomreset" title="Установить масштаб изображения 1:1">1:1</a></span>
+					</td>
+					<td>
+						%if account:
+							<a href="/account/">${account.email}</a>
+						%else:
+							<a href="/account/login/">Войти</a><a href="/account/create/">Создать учетную запись</a>
+						%endif
+					</td>
+				</tr>
+			</table>
+		</div>
+		<%block name="main"/>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<%block name="scripts"/>
+		<script>
+			$(window).on('resize',function(){location.reload();});
+		</script>
+	</body>
+</html>

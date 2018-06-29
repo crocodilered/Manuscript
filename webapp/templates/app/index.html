@@ -1,0 +1,20 @@
+<%inherit file="../_base.html"/>
+
+
+<%block name="main">
+	<div id="_content" class="content-list">
+		<br><br><br>
+		<dl>
+			% for book in books:
+				% if book.enabled and len(book.pages) > 0:
+					<dt style="margin:.8rem 0; font-size:1.4rem; text-align:center;">
+						% if book.author:
+							<small style="font-size:70%; color:#999;">${book.author}</small><br>
+						% endif
+						<a href="${book.href()}">${book.title}</a>
+					</dt>
+				% endif
+			% endfor
+		</dl>
+	</div>
+</%block>
